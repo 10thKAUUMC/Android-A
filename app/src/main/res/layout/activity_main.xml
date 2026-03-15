@@ -8,12 +8,83 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="172dp"
+        android:layout_height="40dp"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:text="오늘 하루는 어땠나요?"
+        tools:layout_editor_absoluteX="163dp"
+        tools:layout_editor_absoluteY="86dp" />
+
+    <TextView
+        android:id="@+id/textViewSubtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+        android:text="감정 우표를 선택해주세요"
+        tools:layout_editor_absoluteX="130dp"
+        tools:layout_editor_absoluteY="116dp" />
+
+    <TextView
+        android:id="@+id/textViewSubtitle2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleX="0.7"
+        android:scaleY="0.7"
+        android:text="선택한 감정우표를 기반으로 맞춤형 질문이 배달됩니다"
+        tools:layout_editor_absoluteX="48dp"
+        tools:layout_editor_absoluteY="147dp" />
+
+    <ImageButton
+        android:id="@+id/happyButton"
+        android:layout_width="42dp"
+        android:layout_height="47dp"
+        app:srcCompat="@drawable/ic_happy"
+        tools:layout_editor_absoluteX="185dp"
+        tools:layout_editor_absoluteY="216dp" />
+
+    <TextView
+        android:id="@+id/textViewUnderText"
+        android:layout_width="170dp"
+        android:layout_height="417dp"
+        android:text="더 없이 행복한 하루였어요\n\n\n\n\n들뜨고 흥분돼요
+        \n\n\n\n\n평범한 하루였어요\n\n\n\n\n생각이 많아지고 불안해요
+        \n\n\n\n\n부글부글 화가 나요"
+        tools:layout_editor_absoluteX="121dp"
+        tools:layout_editor_absoluteY="275dp" />
+
+    <ImageView
+        android:id="@+id/excitingButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_exciting"
+        tools:layout_editor_absoluteX="185dp"
+        tools:layout_editor_absoluteY="303dp" />
+
+    <ImageView
+        android:id="@+id/normalButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_normal"
+        tools:layout_editor_absoluteX="185dp"
+        tools:layout_editor_absoluteY="389dp" />
+
+    <ImageView
+        android:id="@+id/nervousButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_nervous"
+        tools:layout_editor_absoluteX="185dp"
+        tools:layout_editor_absoluteY="480dp" />
+
+    <ImageView
+        android:id="@+id/badButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_bad"
+        tools:layout_editor_absoluteX="185dp"
+        tools:layout_editor_absoluteY="563dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
