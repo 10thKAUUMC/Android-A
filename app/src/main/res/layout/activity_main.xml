@@ -5,17 +5,49 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    tools:layout_editor_absoluteX="204dp"
+    tools:layout_editor_absoluteY="-1dp">
+
+    <TextView
+        android:id="@+id/underText5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="9dp"
+        android:layout_marginBottom="115dp"
+        android:text="부글부글 화가 나요"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/underText4"
+        app:layout_constraintTop_toBottomOf="@+id/badButton" />
 
     <TextView
         android:id="@+id/textViewTitle"
-        android:layout_width="172dp"
-        android:layout_height="40dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="231dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="21dp"
         android:scaleX="2"
         android:scaleY="2"
         android:text="오늘 하루는 어땠나요?"
-        tools:layout_editor_absoluteX="163dp"
-        tools:layout_editor_absoluteY="86dp" />
+        app:layout_constraintBottom_toTopOf="@+id/textViewSubtitle2"
+        app:layout_constraintEnd_toEndOf="@+id/textViewSubtitle2"
+        app:layout_constraintStart_toStartOf="@+id/textViewSubtitle"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewSubtitle2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="39dp"
+        android:layout_marginBottom="64dp"
+        android:scaleX="0.7"
+        android:scaleY="0.7"
+        android:text="선택한 감정우표를 기반으로 맞춤형 질문이 배달됩니다"
+        app:layout_constraintBottom_toTopOf="@+id/happyButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
 
     <TextView
         android:id="@+id/textViewSubtitle"
@@ -24,67 +56,106 @@
         android:scaleX="1.2"
         android:scaleY="1.2"
         android:text="감정 우표를 선택해주세요"
-        tools:layout_editor_absoluteX="130dp"
-        tools:layout_editor_absoluteY="116dp" />
-
-    <TextView
-        android:id="@+id/textViewSubtitle2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleX="0.7"
-        android:scaleY="0.7"
-        android:text="선택한 감정우표를 기반으로 맞춤형 질문이 배달됩니다"
-        tools:layout_editor_absoluteX="48dp"
-        tools:layout_editor_absoluteY="147dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/textViewTitle"
+        app:layout_constraintEnd_toEndOf="@+id/textViewSubtitle2"
+        app:layout_constraintStart_toStartOf="@+id/textViewSubtitle2"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
 
     <ImageButton
         android:id="@+id/happyButton"
         android:layout_width="42dp"
-        android:layout_height="47dp"
-        app:srcCompat="@drawable/ic_happy"
-        tools:layout_editor_absoluteX="185dp"
-        tools:layout_editor_absoluteY="216dp" />
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/underText1"
+        app:layout_constraintEnd_toEndOf="@+id/underText1"
+        app:layout_constraintStart_toStartOf="@+id/underText1"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSubtitle2"
+        app:srcCompat="@drawable/ic_happy" />
+
+    <ImageButton
+        android:id="@+id/normalButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="13dp"
+        app:layout_constraintBottom_toTopOf="@+id/underText3"
+        app:layout_constraintEnd_toEndOf="@+id/nervousButton"
+        app:layout_constraintStart_toStartOf="@+id/nervousButton"
+        app:layout_constraintTop_toBottomOf="@+id/underText2"
+        app:srcCompat="@drawable/ic_normal" />
+
+    <ImageButton
+        android:id="@+id/nervousButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/underText4"
+        app:layout_constraintEnd_toEndOf="@+id/excitingButton"
+        app:layout_constraintStart_toStartOf="@+id/excitingButton"
+        app:layout_constraintTop_toBottomOf="@+id/underText3"
+        app:srcCompat="@drawable/ic_nervous" />
+
+    <ImageButton
+        android:id="@+id/badButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="13dp"
+        app:layout_constraintBottom_toTopOf="@+id/underText5"
+        app:layout_constraintEnd_toEndOf="@+id/nervousButton"
+        app:layout_constraintStart_toStartOf="@+id/nervousButton"
+        app:layout_constraintTop_toBottomOf="@+id/underText4"
+        app:srcCompat="@drawable/ic_bad" />
+
+    <ImageButton
+        android:id="@+id/excitingButton"
+        android:layout_width="42dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="13dp"
+        app:layout_constraintBottom_toTopOf="@+id/underText2"
+        app:layout_constraintEnd_toEndOf="@+id/underText1"
+        app:layout_constraintStart_toStartOf="@+id/underText1"
+        app:layout_constraintTop_toBottomOf="@+id/underText1"
+        app:srcCompat="@drawable/ic_exciting" />
 
     <TextView
-        android:id="@+id/textViewUnderText"
-        android:layout_width="170dp"
-        android:layout_height="417dp"
-        android:text="더 없이 행복한 하루였어요\n\n\n\n\n들뜨고 흥분돼요
-        \n\n\n\n\n평범한 하루였어요\n\n\n\n\n생각이 많아지고 불안해요
-        \n\n\n\n\n부글부글 화가 나요"
-        tools:layout_editor_absoluteX="121dp"
-        tools:layout_editor_absoluteY="275dp" />
-
-    <ImageView
-        android:id="@+id/excitingButton"
+        android:id="@+id/underText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_exciting"
-        tools:layout_editor_absoluteX="185dp"
-        tools:layout_editor_absoluteY="303dp" />
+        android:layout_marginEnd="111dp"
+        android:layout_marginBottom="8dp"
+        android:text="더없이 행복한 하루였어요"
+        app:layout_constraintBottom_toTopOf="@+id/excitingButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/happyButton" />
 
-    <ImageView
-        android:id="@+id/normalButton"
+    <TextView
+        android:id="@+id/underText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_normal"
-        tools:layout_editor_absoluteX="185dp"
-        tools:layout_editor_absoluteY="389dp" />
+        android:layout_marginBottom="8dp"
+        android:text="들뜨고 흥분돼요"
+        app:layout_constraintBottom_toTopOf="@+id/normalButton"
+        app:layout_constraintEnd_toEndOf="@+id/underText3"
+        app:layout_constraintTop_toBottomOf="@+id/excitingButton" />
 
-    <ImageView
-        android:id="@+id/nervousButton"
+    <TextView
+        android:id="@+id/underText3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_nervous"
-        tools:layout_editor_absoluteX="185dp"
-        tools:layout_editor_absoluteY="480dp" />
+        android:layout_marginStart="14dp"
+        android:layout_marginBottom="3dp"
+        android:text="평범한 하루였어요"
+        app:layout_constraintBottom_toTopOf="@+id/nervousButton"
+        app:layout_constraintStart_toStartOf="@+id/underText4"
+        app:layout_constraintTop_toBottomOf="@+id/normalButton" />
 
-    <ImageView
-        android:id="@+id/badButton"
+    <TextView
+        android:id="@+id/underText4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_bad"
-        tools:layout_editor_absoluteX="185dp"
-        tools:layout_editor_absoluteY="563dp" />
+        android:layout_marginEnd="115dp"
+        android:text="생각이 많아지고 불안해요"
+        app:layout_constraintBottom_toTopOf="@+id/badButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nervousButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
