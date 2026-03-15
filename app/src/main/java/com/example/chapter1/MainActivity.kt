@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
             binding.underText5.setTextColor(android.graphics.Color.GREEN)
         }
 
-        binding.happyButton.setOnClickListener {
+        binding.badButton.setOnClickListener {
             // XML 파일에 적힌 ID가 textViewUnderText라면 아래와 같이 작성하세요
             binding.underText1.setTextColor(android.graphics.Color.RED)
             binding.underText2.setTextColor(android.graphics.Color.RED)
