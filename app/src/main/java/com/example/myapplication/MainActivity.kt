@@ -21,19 +21,19 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.ivStampSmile.setOnClickListener {
-            binding.textView8.setTextColor(Color.parseColor("#4A90E2"))
+            binding.textView7.setTextColor(Color.parseColor("#4A90E2"))
         }
 
         binding.ivStampNeutral.setOnClickListener {
-            binding.textView9.setTextColor(Color.parseColor("#A36FFF"))
+            binding.textView7.setTextColor(Color.parseColor("#A36FFF"))
         }
 
         binding.ivStampSad.setOnClickListener {
-            binding.textView10.setTextColor(Color.parseColor("#4CAF50"))
+            binding.textView7.setTextColor(Color.parseColor("#4CAF50"))
         }
 
         binding.ivStampAngry.setOnClickListener {
-            binding.textView11.setTextColor(Color.parseColor("#FF4B4B"))
+            binding.textView7.setTextColor(Color.parseColor("#FF4B4B"))
         }
 
     }
