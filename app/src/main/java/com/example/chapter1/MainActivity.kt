@@ -11,68 +11,85 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+//    override fun onStart() {
+//        super.onStart()
+//        supportFragmentManager.beginTransaction()
+//            .replace(R.id.main_fragmentContainer, HomeFragment())
+//            .commit()
+//    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // 1. 바인딩 초기화 (이게 가장 먼저 와야 합니다)
+        enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
-
-        // 2. 반드시 binding.root를 사용해 화면을 설정 (중복 setContentView 삭제)
         setContentView(binding.root)
 
-        enableEdgeToEdge()
+        val receivedTitle = intent.getStringExtra("title_key") ?: "Discover"
 
-        // 3. 시스템 바 패딩 설정
-        ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        if (savedInstanceState == null) {
+            // 2. HomeFragment 인스턴스 생성 및 데이터 담기
+            val homeFragment = HomeFragment()
+            val bundle = Bundle()
+            bundle.putString("home_title", receivedTitle)
+            homeFragment.arguments = bundle
+
+
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.main_fragmentContainer, homeFragment)
+                .commit()
         }
 
-        // 4. 클릭 리스너 설정
-        binding.happyButton.setOnClickListener {
-            // XML 파일에 적힌 ID가 textViewUnderText라면 아래와 같이 작성하세요
-            binding.underText1.setTextColor(android.graphics.Color.YELLOW)
-            binding.underText2.setTextColor(android.graphics.Color.YELLOW)
-            binding.underText3.setTextColor(android.graphics.Color.YELLOW)
-            binding.underText4.setTextColor(android.graphics.Color.YELLOW)
-            binding.underText5.setTextColor(android.graphics.Color.YELLOW)
-        }
 
-        binding.excitingButton.setOnClickListener {
-            // XML 파일에 적힌 ID가 textViewUnderText라면 아래와 같이 작성하세요
-            binding.underText1.setTextColor(android.graphics.Color.BLUE)
-            binding.underText2.setTextColor(android.graphics.Color.BLUE)
-            binding.underText3.setTextColor(android.graphics.Color.BLUE)
-            binding.underText4.setTextColor(android.graphics.Color.BLUE)
-            binding.underText5.setTextColor(android.graphics.Color.BLUE)
-        }
 
-        binding.normalButton.setOnClickListener {
-            // XML 파일에 적힌 ID가 textViewUnderText라면 아래와 같이 작성하세요
-            binding.underText1.setTextColor(android.graphics.Color.MAGENTA)
-            binding.underText2.setTextColor(android.graphics.Color.MAGENTA)
-            binding.underText3.setTextColor(android.graphics.Color.MAGENTA)
-            binding.underText4.setTextColor(android.graphics.Color.MAGENTA)
-            binding.underText5.setTextColor(android.graphics.Color.MAGENTA)
-        }
 
-        binding.nervousButton.setOnClickListener {
-            // XML 파일에 적힌 ID가 textViewUnderText라면 아래와 같이 작성하세요
-            binding.underText1.setTextColor(android.graphics.Color.GREEN)
-            binding.underText2.setTextColor(android.graphics.Color.GREEN)
-            binding.underText3.setTextColor(android.graphics.Color.GREEN)
-            binding.underText4.setTextColor(android.graphics.Color.GREEN)
-            binding.underText5.setTextColor(android.graphics.Color.GREEN)
-        }
 
-        binding.badButton.setOnClickListener {
-            // XML 파일에 적힌 ID가 textViewUnderText라면 아래와 같이 작성하세요
-            binding.underText1.setTextColor(android.graphics.Color.RED)
-            binding.underText2.setTextColor(android.graphics.Color.RED)
-            binding.underText3.setTextColor(android.graphics.Color.RED)
-            binding.underText4.setTextColor(android.graphics.Color.RED)
-            binding.underText5.setTextColor(android.graphics.Color.RED)
+            //BottomNavigationView를 눌렀을 때 Fragment 변경하기
+        binding.mainBnv.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+
+                //매인 화면
+                R.id.homeFragment -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.main_fragmentContainer, HomeFragment())
+                        .commit()
+                    true
+                }
+
+                //일기 작성 화면
+                R.id.diaryFragment -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.main_fragmentContainer, ShoppingFragment())
+                        .commit()
+                    true
+                }
+
+                //일기 히스토리 화면
+                R.id.calendarFragment -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.main_fragmentContainer, WishlistFragment())
+                        .commit()
+                    true
+                }
+
+                //친구 화면
+                R.id.friendFragment -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.main_fragmentContainer, BagFragment())
+                        .commit()
+                    true
+                }
+
+                //마이페이지 화면
+                R.id.mypageFragment -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.main_fragmentContainer, ProfileFragment())
+                        .commit()
+                    true
+                }
+
+                else -> false
+            }
         }
     }
 }
