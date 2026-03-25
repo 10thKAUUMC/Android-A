@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".HomeFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp">
+        <TextView
+            android:id="@+id/tv_home_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Discover"
+            android:textColor="@color/black"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_home_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="9월 4일 목요일"
+            android:textColor="#888888"
+            android:textSize="14sp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="@id/tv_home_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_home_title" />
+
+        <ImageView
+            android:id="@+id/iv_home_discover"
+            android:layout_width="378dp"
+            android:layout_height="505dp"
+            android:src="@drawable/home"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="60dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_home_date" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
