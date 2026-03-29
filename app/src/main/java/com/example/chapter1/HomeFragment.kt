@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import android.widget.Toast
 import com.example.chapter1.databinding.FragmentHomeBinding
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.GridLayoutManager
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -74,6 +76,17 @@ class HomeFragment : Fragment() {
         val title = arguments?.getString("home_title") ?: "Discover"
         binding.tvTitle.text = title
 
+        // HomeFragment.kt 내의 onViewCreated 또는 onCreateView 내부
+        val recyclerView = binding.recHome
+// 1. 데이터 준비 (이미지 소스 이름은 본인이 가진mipmap/drawable 이름으로 수정하세요)
+        val dataList = mutableListOf<HomeItem>()
+        dataList.add(HomeItem("Air Jordan XXXVI", "US$185", R.mipmap.ic_shoe1))
+        dataList.add(HomeItem("Nike Air Force 1'07", "US$115", R.mipmap.ic_shoe2))
+
+
+// 2. 어댑터 및 레이아웃 매니저 설정
+        recyclerView.layoutManager = GridLayoutManager(context, 2)
+        recyclerView.adapter = HomeAdapter(dataList)
     }
 
 
