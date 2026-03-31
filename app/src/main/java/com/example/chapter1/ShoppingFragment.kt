@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
+import com.example.chapter1.databinding.FragmentShoppingBinding
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -23,7 +25,8 @@ class ShoppingFragment : Fragment() {
     private var param2: String? = null
 
 
-
+    private var _binding: FragmentShoppingBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,12 +41,26 @@ class ShoppingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shopping, container, false)
+        _binding = FragmentShoppingBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // HomeFragment.kt 내의 onViewCreated 또는 onCreateView 내부
+        val recyclerView = binding.recShopping
+// 1. 데이터 준비 (이미지 소스 이름은 본인이 가진mipmap/drawable 이름으로 수정하세요)
+        val dataList = mutableListOf<HomeItem>()
+        dataList.add(HomeItem("","Nike Everyday Plus Cushioned", "Training Ankle Socks (6 Pairs)","US$10", R.mipmap.ic_socks2))
+        dataList.add(HomeItem("","Nike Elite Crew", "Basketball Socks\n7 Colours","US$16",R.mipmap.ic_socks1))
+        dataList.add(HomeItem("BestSeller","Nike Air Force 1'07", "Women's Shoes\n5 Colours","US$115",R.mipmap.ic_shoe3))
+        dataList.add(HomeItem("BestSeller","Jordan ENike Air Force\n1'07ssentials", "Men's Shoes\n2 Colours","US$115",R.mipmap.ic_shoe4))
+
+
+// 2. 어댑터 및 레이아웃 매니저 설정
+        recyclerView.layoutManager = GridLayoutManager(context, 2)
+        recyclerView.adapter = HomeAdapter(dataList)
     }
     companion object {
         /**

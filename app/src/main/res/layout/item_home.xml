@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/itemImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_shoe1" />
+
+        <TextView
+            android:id="@+id/itemState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textColor="#FC5100"/>
+
+        <TextView
+            android:id="@+id/itemTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Air Jordan XXXVI"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/itemTitle2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="US$185"
+            android:textColor="#c6c6c6" />
+
+        <TextView
+            android:id="@+id/itemTitle3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
