@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
+import com.example.chapter1.databinding.FragmentWishlistBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +23,12 @@ class WishlistFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    // 1. 바인딩 객체 선언 (null 허용)
+    private var _binding: FragmentWishlistBinding? = null
+
+    // 2. 바인딩 객체에 접근하기 위한 프로퍼티 (!!를 사용하여 매번 null 체크를 하지 않게 함)
+    private val binding get() = _binding!!
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -34,7 +42,26 @@ class WishlistFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_wishlist, container, false)
+        _binding = FragmentWishlistBinding.inflate(inflater, container, false)
+
+        // 4. 바인딩 객체의 루트 뷰를 반환
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // HomeFragment.kt 내의 onViewCreated 또는 onCreateView 내부
+        val recyclerView = binding.recWhishlist
+// 1. 데이터 준비 (이미지 소스 이름은 본인이 가진mipmap/drawable 이름으로 수정하세요)
+        val dataList = mutableListOf<HomeItem>()
+        dataList.add(HomeItem("","Air Jordan 1 Mid", "","US$125", R.mipmap.ic_shoe5))
+        dataList.add(HomeItem("","Nike Everyday Plus Cushioned", "Training Ankle Socks (6 Pairs)","US$10", R.mipmap.ic_socks2))
+
+
+// 2. 어댑터 및 레이아웃 매니저 설정
+        recyclerView.layoutManager = GridLayoutManager(context, 2)
+        recyclerView.adapter = HomeAdapter(dataList)
     }
 
     companion object {
@@ -55,5 +82,10 @@ class WishlistFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        // 6. 메모리 누수 방지를 위해 뷰가 파괴될 때 바인딩 객체 해제
+        _binding = null
     }
 }
