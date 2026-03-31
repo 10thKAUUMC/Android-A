@@ -80,8 +80,8 @@ class HomeFragment : Fragment() {
         val recyclerView = binding.recHome
 // 1. 데이터 준비 (이미지 소스 이름은 본인이 가진mipmap/drawable 이름으로 수정하세요)
         val dataList = mutableListOf<HomeItem>()
-        dataList.add(HomeItem("Air Jordan XXXVI", "US$185", R.mipmap.ic_shoe1))
-        dataList.add(HomeItem("Nike Air Force 1'07", "US$115", R.mipmap.ic_shoe2))
+        dataList.add(HomeItem("","Air Jordan XXXVI", "US$185","", R.mipmap.ic_shoe1))
+        dataList.add(HomeItem("","Nike Air Force 1'07", "US$115","",R.mipmap.ic_shoe3))
 
 
 // 2. 어댑터 및 레이아웃 매니저 설정
