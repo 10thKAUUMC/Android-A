@@ -12,8 +12,10 @@ class HomeAdapter(private val itemList: List<HomeItem>) :
     RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
     class HomeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val seller: TextView = view.findViewById(R.id.itemState)
         val title: TextView = view.findViewById(R.id.itemTitle)
         val price: TextView = view.findViewById(R.id.itemTitle2)
+        val subtitle: TextView = view.findViewById(R.id.itemTitle3)
         val image: ImageView = view.findViewById(R.id.itemImage)
     }
 
@@ -25,8 +27,10 @@ class HomeAdapter(private val itemList: List<HomeItem>) :
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
         val item = itemList[position]
+        holder.seller.text = item.seller
         holder.title.text = item.title
         holder.price.text = item.price
+        holder.subtitle.text = item.subtitle
         holder.image.setImageResource(item.imageRes)
     }
 
