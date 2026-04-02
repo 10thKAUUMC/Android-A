@@ -3,7 +3,8 @@ plugins {
 }
 
 android {
-    namespace = "com.example.chapter1"
+    namespace = "com.example.week2"
+    viewBinding { enable = true }
     compileSdk {
         version = release(36) {
             minorApiLevel = 1
@@ -11,7 +12,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.chapter1"
+        applicationId = "com.example.week2"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
@@ -33,10 +34,6 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-
-    viewBinding {
-        enable = true
-    }
     buildFeatures {
         viewBinding = true
     }
@@ -48,15 +45,9 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    implementation(libs.androidx.navigation.fragment.ktx)
-    implementation(libs.androidx.navigation.ui.ktx)
-    implementation(libs.androidx.legacy.support.v4)
-    implementation(libs.androidx.lifecycle.livedata.ktx)
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    implementation(libs.androidx.fragment.ktx)
-    implementation(libs.androidx.recyclerview)
-    implementation(libs.androidx.cardview)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation("androidx.navigation:navigation-fragment-ktx:2.8.0")
+    implementation("androidx.navigation:navigation-ui-ktx:2.8.0")
 }
