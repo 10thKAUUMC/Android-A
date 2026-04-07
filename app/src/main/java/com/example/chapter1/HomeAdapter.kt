@@ -1,4 +1,4 @@
-package com.example.chapter1 // 본인의 패키지명 유지
+package com.example.chapter1
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,15 +6,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.launch
 
-// 이 아래에 제가 드린 HomeAdapter 코드를 붙여넣으세요.
-// 1. List -> MutableList로 변경하여 수정 가능하게 만듭니다.
-class HomeAdapter(private var itemList: MutableList<HomeItem>) :
-    RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
+class HomeAdapter(
+    private var itemList: MutableList<HomeItem>,
+    private val onHeartClick: (List<HomeItem>) -> Unit // 하트 클릭 시 데이터를 저장하기 위한 콜백
+) : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
-    // 2. 이제 clear()와 addAll()이 정상적으로 작동합니다.
     fun setData(newList: List<HomeItem>) {
         this.itemList.clear()
         this.itemList.addAll(newList)
@@ -27,6 +24,7 @@ class HomeAdapter(private var itemList: MutableList<HomeItem>) :
         val price: TextView = view.findViewById(R.id.itemTitle2)
         val subtitle: TextView = view.findViewById(R.id.itemTitle3)
         val image: ImageView = view.findViewById(R.id.itemImage)
+        val wish: ImageView = view.findViewById(R.id.wishButton)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
@@ -42,6 +40,28 @@ class HomeAdapter(private var itemList: MutableList<HomeItem>) :
         holder.price.text = item.price
         holder.subtitle.text = item.subtitle
         holder.image.setImageResource(item.imageRes)
+
+        // 데이터에 저장된 리소스로 이미지 설정
+        holder.wish.setImageResource(item.wish)
+
+        // 하트 클릭 이벤트
+        holder.wish.setOnClickListener {
+            // 이미지 토글 (on <-> off)
+            val newWishIcon = if (item.wish == R.drawable.ic_heatr_off) {
+                R.drawable.ic_heart_on
+            } else {
+                R.drawable.ic_heatr_off
+            }
+
+            // 1. 현재 리스트의 해당 아이템 수정 (copy 사용)
+            itemList[position] = item.copy(wish = newWishIcon)
+
+            // 2. 화면 갱신
+            notifyItemChanged(position)
+
+            // 3. 변경된 전체 리스트를 프래그먼트로 전달하여 DataStore에 저장하도록 함
+            onHeartClick(itemList)
+        }
     }
 
     override fun getItemCount() = itemList.size

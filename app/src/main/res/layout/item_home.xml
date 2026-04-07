@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardCornerRadius="12dp"
     app:cardElevation="4dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:padding="8dp">
+
 
         <ImageView
             android:id="@+id/itemImage"
@@ -22,13 +23,15 @@
 
         <TextView
             android:id="@+id/itemState"
+            app:layout_constraintTop_toBottomOf="@id/itemImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"
-            android:textColor="#FC5100"/>
+            android:textColor="#FC5100" />
 
         <TextView
             android:id="@+id/itemTitle"
+            app:layout_constraintTop_toBottomOf="@id/itemState"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -38,6 +41,7 @@
 
         <TextView
             android:id="@+id/itemTitle2"
+            app:layout_constraintTop_toBottomOf="@id/itemTitle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="US$185"
@@ -45,8 +49,17 @@
 
         <TextView
             android:id="@+id/itemTitle3"
+            app:layout_constraintTop_toBottomOf="@id/itemTitle2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView" />
-    </LinearLayout>
+
+        <ImageView
+            android:id="@+id/wishButton"
+            app:layout_constraintTop_toTopOf="@id/itemImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_heatr_off"
+            app:layout_constraintRight_toRightOf="@id/itemImage"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

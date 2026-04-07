@@ -60,7 +60,13 @@ class WishlistFragment : Fragment() {
         settingsManager = SettingsManager(requireContext())
 
         // 1. 어댑터 초기화 (빈 리스트)
-        val homeAdapter = HomeAdapter(mutableListOf())
+        // 1. 어댑터 초기화 (람다식을 추가하여 클릭 시 저장 로직 연결)
+        val homeAdapter = HomeAdapter(mutableListOf()) { updatedList ->
+            // 하트 클릭 시 위시리스트 전용 저장 함수 호출
+            viewLifecycleOwner.lifecycleScope.launch {
+                settingsManager.saveWishListItems(updatedList)
+            }
+        }
         binding.recWhishlist.apply {
             layoutManager = GridLayoutManager(context, 2)
             adapter = homeAdapter
@@ -72,8 +78,8 @@ class WishlistFragment : Fragment() {
                 if (dataList.isEmpty()) {
                     // 데이터가 없으면 초기 위시리스트 저장
                     val initialWishlist = listOf(
-                        HomeItem("","Air Jordan 1 Mid", "","US$125", R.mipmap.ic_shoe5),
-                        HomeItem("","Nike Everyday Plus Cushioned", "Training Ankle Socks (6 Pairs)","US$10", R.mipmap.ic_socks2)
+                        HomeItem("","Air Jordan 1 Mid", "","US$125", R.mipmap.ic_shoe5,0),
+                        HomeItem("","Nike Everyday Plus Cushioned", "Training Ankle Socks (6 Pairs)","US$10", R.mipmap.ic_socks2,0)
                     )
                     settingsManager.saveWishListItems(initialWishlist)
                 } else {
