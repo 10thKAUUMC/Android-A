@@ -6,10 +6,20 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 
 // 이 아래에 제가 드린 HomeAdapter 코드를 붙여넣으세요.
-class HomeAdapter(private val itemList: List<HomeItem>) :
+// 1. List -> MutableList로 변경하여 수정 가능하게 만듭니다.
+class HomeAdapter(private var itemList: MutableList<HomeItem>) :
     RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
+
+    // 2. 이제 clear()와 addAll()이 정상적으로 작동합니다.
+    fun setData(newList: List<HomeItem>) {
+        this.itemList.clear()
+        this.itemList.addAll(newList)
+        notifyDataSetChanged()
+    }
 
     class HomeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val seller: TextView = view.findViewById(R.id.itemState)
