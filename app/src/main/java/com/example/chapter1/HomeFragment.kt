@@ -66,7 +66,14 @@ class HomeFragment : Fragment() {
         settingsManager = SettingsManager(requireContext())
 
         // 1. 리사이클러뷰 기본 설정
-        val homeAdapter = HomeAdapter(mutableListOf()) // 초기에는 빈 리스트
+        // 에러 해결: 중괄호 { } 를 추가하여 클릭 시 저장 로직을 넘겨줍니다.
+        val homeAdapter = HomeAdapter(mutableListOf()) { updatedList ->
+            // 하트 클릭 시 DataStore에 즉시 저장
+            viewLifecycleOwner.lifecycleScope.launch {
+                settingsManager.saveHomeItems(updatedList)
+            }
+        }
+
         binding.recHome.apply {
             layoutManager = GridLayoutManager(context, 2)
             adapter = homeAdapter
@@ -78,8 +85,8 @@ class HomeFragment : Fragment() {
                 if (dataList.isEmpty()) {
                     // 데이터가 하나도 없을 때 초기 데이터 저장 (테스트용)
                     val initialData = listOf(
-                        HomeItem("", "Air Jordan XXXVI", "US$185", "", R.mipmap.ic_shoe1),
-                        HomeItem("", "Nike Air Force 1'07", "US$115", "", R.mipmap.ic_shoe3)
+                        HomeItem("", "Air Jordan XXXVI", "US$185", "", R.mipmap.ic_shoe1,0),
+                        HomeItem("", "Nike Air Force 1'07", "US$115", "", R.mipmap.ic_shoe3, 0)
                     )
                     settingsManager.saveHomeItems(initialData)
                 } else {

@@ -7,5 +7,6 @@ data class HomeItem(
     val title: String,
     val price: String,
     val subtitle: String,
-    val imageRes: Int
+    val imageRes: Int,
+    val wish: Int
 )
