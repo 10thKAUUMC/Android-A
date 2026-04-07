@@ -16,6 +16,8 @@ class SettingsManager(private val context: Context) {
 
     companion object {
         val SHOE_LIST_KEY = stringPreferencesKey("shoe_list")
+        val SHOPPING_LIST_KEY = stringPreferencesKey("shopping_list") // Shopping용 추가
+        val WISHLIST_KEY = stringPreferencesKey("wishlist") // 위시리스트용 키 추가
     }
 
     // 리스트 저장 함수
@@ -37,4 +39,38 @@ class SettingsManager(private val context: Context) {
                 gson.fromJson(jsonString, type) // JSON을 다시 리스트 객체로 변환
             }
         }
+
+    /** --- 쇼핑 데이터 관련 (이 부분이 추가되어야 에러가 사라집니다) --- **/
+    val shoppingItemsFlow: Flow<List<HomeItem>> = context.dataStore.data
+        .map { preferences ->
+            val jsonString = preferences[SHOPPING_LIST_KEY] ?: ""
+            if (jsonString.isEmpty()) emptyList()
+            else {
+                val type = object : TypeToken<List<HomeItem>>() {}.type
+                gson.fromJson(jsonString, type)
+            }
+        }
+
+    suspend fun saveShoppingItems(items: List<HomeItem>) {
+        context.dataStore.edit { preferences ->
+            preferences[SHOPPING_LIST_KEY] = gson.toJson(items)
+        }
+    }
+
+    /** 3. Wishlist 데이터 관련 **/
+    val wishListFlow: Flow<List<HomeItem>> = context.dataStore.data
+        .map { preferences ->
+            val jsonString = preferences[WISHLIST_KEY] ?: ""
+            if (jsonString.isEmpty()) emptyList()
+            else {
+                val type = object : TypeToken<List<HomeItem>>() {}.type
+                gson.fromJson(jsonString, type)
+            }
+        }
+
+    suspend fun saveWishListItems(items: List<HomeItem>) {
+        context.dataStore.edit { preferences ->
+            preferences[WISHLIST_KEY] = gson.toJson(items)
+        }
+    }
 }
