@@ -10,6 +10,8 @@ import android.widget.Toast
 import com.example.chapter1.databinding.FragmentHomeBinding
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -31,6 +33,9 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    // SettingsManager 선언
+    private lateinit var settingsManager: SettingsManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +62,32 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        settingsManager = SettingsManager(requireContext())
+
+        // 1. 리사이클러뷰 기본 설정
+        val homeAdapter = HomeAdapter(mutableListOf()) // 초기에는 빈 리스트
+        binding.recHome.apply {
+            layoutManager = GridLayoutManager(context, 2)
+            adapter = homeAdapter
+        }
+
+        // 2. DataStore에서 데이터 관찰 (Collect)
+        viewLifecycleOwner.lifecycleScope.launch {
+            settingsManager.homeItemsFlow.collect { dataList ->
+                if (dataList.isEmpty()) {
+                    // 데이터가 하나도 없을 때 초기 데이터 저장 (테스트용)
+                    val initialData = listOf(
+                        HomeItem("", "Air Jordan XXXVI", "US$185", "", R.mipmap.ic_shoe1),
+                        HomeItem("", "Nike Air Force 1'07", "US$115", "", R.mipmap.ic_shoe3)
+                    )
+                    settingsManager.saveHomeItems(initialData)
+                } else {
+                    // 데이터가 있으면 어댑터에 갱신
+                    homeAdapter.setData(dataList) // 어댑터에 데이터를 업데이트하는 함수가 필요합니다
+                }
+            }
+        }
         val callback = object : OnBackPressedCallback(true) { // true: 콜백 활성화
             override fun handleOnBackPressed() {
                 // 현재 시각과 이전 시각의 차이가 2초(2000ms) 이내인지 확인
@@ -76,17 +107,17 @@ class HomeFragment : Fragment() {
         val title = arguments?.getString("home_title") ?: "Discover"
         binding.tvTitle.text = title
 
-        // HomeFragment.kt 내의 onViewCreated 또는 onCreateView 내부
-        val recyclerView = binding.recHome
-// 1. 데이터 준비 (이미지 소스 이름은 본인이 가진mipmap/drawable 이름으로 수정하세요)
-        val dataList = mutableListOf<HomeItem>()
-        dataList.add(HomeItem("","Air Jordan XXXVI", "US$185","", R.mipmap.ic_shoe1))
-        dataList.add(HomeItem("","Nike Air Force 1'07", "US$115","",R.mipmap.ic_shoe3))
-
-
-// 2. 어댑터 및 레이아웃 매니저 설정
-        recyclerView.layoutManager = GridLayoutManager(context, 2)
-        recyclerView.adapter = HomeAdapter(dataList)
+//        // HomeFragment.kt 내의 onViewCreated 또는 onCreateView 내부
+//        val recyclerView = binding.recHome
+//// 1. 데이터 준비 (이미지 소스 이름은 본인이 가진mipmap/drawable 이름으로 수정하세요)
+//        val dataList = mutableListOf<HomeItem>()
+//        dataList.add(HomeItem("","Air Jordan XXXVI", "US$185","", R.mipmap.ic_shoe1))
+//        dataList.add(HomeItem("","Nike Air Force 1'07", "US$115","",R.mipmap.ic_shoe3))
+//
+//
+//// 2. 어댑터 및 레이아웃 매니저 설정
+//        recyclerView.layoutManager = GridLayoutManager(context, 2)
+//        recyclerView.adapter = HomeAdapter(dataList)
     }
 
 
