@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">week2</string>
+
+    <string name="home_title_discover">Discover</string>
+    <string name="home_label_new">What\'s new</string>
+    <string name="home_recommend_nike">나이키 최신 상품</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
