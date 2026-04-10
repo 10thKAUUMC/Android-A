@@ -14,7 +14,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    // DataStore 관리 객체와 어댑터 선언
     private lateinit var productManager: ProductManager
     private lateinit var homeAdapter: HomeProductAdapter
 
