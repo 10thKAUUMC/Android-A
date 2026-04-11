@@ -7,123 +7,55 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.chapter1.databinding.FragmentWishlistBinding
-import androidx.lifecycle.lifecycleScope // 필수 추가
-import kotlinx.coroutines.launch // 필수 추가
-import kotlinx.coroutines.flow.collect // 필수 추가
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [WishlistFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class WishlistFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    // 1. 바인딩 객체 선언 (null 허용)
     private var _binding: FragmentWishlistBinding? = null
-
-    // 2. 바인딩 객체에 접근하기 위한 프로퍼티 (!!를 사용하여 매번 null 체크를 하지 않게 함)
     private val binding get() = _binding!!
-
-    // SettingsManager 선언
     private lateinit var settingsManager: SettingsManager
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var homeAdapter: HomeAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    ): View {
         _binding = FragmentWishlistBinding.inflate(inflater, container, false)
-
-        // 4. 바인딩 객체의 루트 뷰를 반환
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         settingsManager = SettingsManager(requireContext())
 
-        // 1. 어댑터 초기화 (빈 리스트)
-        // 1. 어댑터 초기화 (람다식을 추가하여 클릭 시 저장 로직 연결)
-        val homeAdapter = HomeAdapter(mutableListOf()) { updatedList ->
-            // 하트 클릭 시 위시리스트 전용 저장 함수 호출
+        // 1. 어댑터 초기화 (위시리스트에서 하트를 해제할 경우 처리)
+        homeAdapter = HomeAdapter(mutableListOf(), true) { updatedWishlist ->
             viewLifecycleOwner.lifecycleScope.launch {
-                settingsManager.saveWishListItems(updatedList)
+                // 위시리스트에서 하트 해제 시 바로 저장 (리스트에서 사라짐)
+                val onlyFavorite = updatedWishlist.filter { it.wish == R.drawable.ic_heart_on }
+                settingsManager.saveWishListItems(onlyFavorite)
+
+                // [선택사항] 쇼핑 리스트의 하트 상태도 해제하고 싶다면 여기서 쇼핑 리스트 Flow를 수정하는 로직 추가 가능
             }
         }
+
         binding.recWhishlist.apply {
             layoutManager = GridLayoutManager(context, 2)
             adapter = homeAdapter
         }
 
-        // 2. DataStore 관찰 (Wishlist용)
+        // 2. DataStore 관찰 (위시리스트 데이터 표시)
         viewLifecycleOwner.lifecycleScope.launch {
             settingsManager.wishListFlow.collect { dataList ->
-                if (dataList.isEmpty()) {
-                    // 데이터가 없으면 초기 위시리스트 저장
-                    val initialWishlist = listOf(
-                        HomeItem("","Air Jordan 1 Mid", "","US$125", R.mipmap.ic_shoe5,0),
-                        HomeItem("","Nike Everyday Plus Cushioned", "Training Ankle Socks (6 Pairs)","US$10", R.mipmap.ic_socks2,0)
-                    )
-                    settingsManager.saveWishListItems(initialWishlist)
-                } else {
-                    // 데이터가 있으면 어댑터 갱신
-                    homeAdapter.setData(dataList)
-                }
+                // 위시리스트이므로 하트가 켜진 데이터만 걸러서 보여줌 (안전장치)
+                val wishlistOnly = dataList.filter { it.wish == R.drawable.ic_heart_on }
+                homeAdapter.setData(wishlistOnly)
             }
         }
-
-//        // HomeFragment.kt 내의 onViewCreated 또는 onCreateView 내부
-//        val recyclerView = binding.recWhishlist
-//// 1. 데이터 준비 (이미지 소스 이름은 본인이 가진mipmap/drawable 이름으로 수정하세요)
-//        val dataList = mutableListOf<HomeItem>()
-//        dataList.add(HomeItem("","Air Jordan 1 Mid", "","US$125", R.mipmap.ic_shoe5))
-//        dataList.add(HomeItem("","Nike Everyday Plus Cushioned", "Training Ankle Socks (6 Pairs)","US$10", R.mipmap.ic_socks2))
-//
-//
-//// 2. 어댑터 및 레이아웃 매니저 설정
-//        recyclerView.layoutManager = GridLayoutManager(context, 2)
-//        recyclerView.adapter = HomeAdapter(dataList)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment WishlistFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            WishlistFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
     override fun onDestroyView() {
         super.onDestroyView()
-        // 6. 메모리 누수 방지를 위해 뷰가 파괴될 때 바인딩 객체 해제
         _binding = null
     }
 }
