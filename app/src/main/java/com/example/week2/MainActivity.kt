@@ -7,7 +7,7 @@ import com.example.week2.HomeFragment
 import com.example.week2.ShopFragment
 import com.example.week2.WishlistFragment
 import com.example.week2.CartFragment
-import com.example.week2.ProfileFragment
+import com.example.week2.ui.profile.ProfileFragment
 
 class MainActivity : AppCompatActivity() {
 

@@ -5,6 +5,6 @@ data class ProductData(
     val id: Int,
     val name: String,
     val price: String,
-    val imageRes: Int,       // 여기 이름이 어댑터와 같아야 합니다!
+    val imageResName: String,  // drawable 파일명 (예: "air_jordan")
     var isLiked: Boolean = false
 )

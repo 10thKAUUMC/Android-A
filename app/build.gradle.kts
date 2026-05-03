@@ -52,4 +52,17 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.8.0")
     implementation("androidx.datastore:datastore-preferences:1.0.0")
     implementation("com.google.code.gson:gson:2.10.1")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    // Retrofit: 서버와 통신하는 메인 도구
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    // Gson Converter: JSON을 코틀린 객체로 바꿔주는 도구
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    // OkHttp & Logging Interceptor: 통신 과정을 관리하고 로그를 찍는 도구
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+    // Glide: 서버 이미지를 불러오기 위한 라이브러리
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
 }

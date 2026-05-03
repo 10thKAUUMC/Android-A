@@ -21,7 +21,11 @@ class HomeProductAdapter(
 
         // 🌟 2. bind 함수에서 isLargeSize 값도 받도록 추가
         fun bind(product: ProductData, showHeart: Boolean, isLargeSize: Boolean) {
-            binding.ivProduct.setImageResource(product.imageRes)
+            val context = binding.root.context
+            val imageResId = context.resources.getIdentifier(
+                product.imageResName, "drawable", context.packageName
+            )
+            binding.ivProduct.setImageResource(imageResId)
             binding.tvName.text = product.name
             binding.tvPrice.text = product.price
 
@@ -42,7 +46,6 @@ class HomeProductAdapter(
             }
 
             // 🌟 3. 코드에서 직접 크기를 조절하는 마법!
-            val context = binding.root.context
             val density = context.resources.displayMetrics.density // dp를 픽셀로 변환하기 위한 도구
 
             val rootParams = binding.root.layoutParams

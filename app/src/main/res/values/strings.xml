@@ -1,9 +1,13 @@
 <resources>
-    <string name="app_name">week2</string>
+    <string name="app_name">나이키 클론</string>
 
-    <string name="home_title_discover">Discover</string>
-    <string name="home_label_new">What\'s new</string>
-    <string name="home_recommend_nike">나이키 최신 상품</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profile_nickname">닉네임</string>
+    <string name="profile_edit_text">프로필 수정</string>
+
+    <string name="profile_following_count">팔로잉 (3)</string>
+    <string name="profile_join_date_text">회원 가입일: 2025년 9월</string>
+    <string name="profile_edit_following">편집</string>
+
+    <string name="profile_membership_title">나이키 멤버 혜택</string>
+    <string name="profile_membership_status">0개 사용 가능</string>
 </resources>

@@ -44,11 +44,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 // 불러온 최신 데이터를 currentList에 백업
                 currentList = products
 
-                if (products.isEmpty()) {
-                    // 최초 실행 시 더미 데이터 세팅
+                if (products.isEmpty() || products.any { it.imageResName.isNullOrEmpty() }) {
+                    // 최초 실행 또는 구버전 데이터(정수 리소스 ID 저장) 감지 시 재초기화
                     val initialData = listOf(
-                        ProductData(1, "Air Jordan XXXVI", "US$185", R.drawable.air_jordan, false),
-                        ProductData(2, "Nike Air Force 1'07", "US$115", R.drawable.nike_air_force, false)
+                        ProductData(1, "Air Jordan XXXVI", "US$185", "air_jordan", false),
+                        ProductData(2, "Nike Air Force 1'07", "US$115", "nike_air_force", false)
                     )
                     productManager.saveProducts(initialData)
                 } else {
