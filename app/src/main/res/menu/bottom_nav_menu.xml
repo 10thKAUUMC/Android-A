@@ -2,22 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/homeFragment"
-        android:icon="@drawable/housesimple"
+        android:icon="@drawable/ic_menu_home2"
         android:title="홈" />
     <item
-        android:id="@+id/shopFragment"
-        android:icon="@drawable/listmagnifyingglass"
+        android:id="@+id/diaryFragment"
+        android:icon="@drawable/ic_menu_search"
         android:title="구매하기" />
     <item
-        android:id="@+id/wishlistFragment"
-        android:icon="@drawable/heartstraight"
+        android:id="@+id/calendarFragment"
+        android:icon="@drawable/ic_menu_wishlist"
         android:title="위시리스트" />
     <item
-        android:id="@+id/cartFragment"
-        android:icon="@drawable/bagsimple"
+        android:id="@+id/friendFragment"
+        android:icon="@drawable/ic_menu_bag"
         android:title="장바구니" />
     <item
-        android:id="@+id/profileFragment"
-        android:icon="@drawable/user"
+        android:id="@+id/mypageFragment"
+        android:icon="@drawable/ic_menu_user"
         android:title="프로필" />
 </menu>
