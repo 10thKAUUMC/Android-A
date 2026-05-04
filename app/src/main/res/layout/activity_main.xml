@@ -17,7 +17,7 @@
     <!--bottom navigation-->
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/main_fragmentContainer"
+        android:id="@+id/main_frm"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="29dp"
@@ -31,6 +31,7 @@
         android:id="@+id/main_bnv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:layout_marginHorizontal="10dp"
         android:layout_marginStart="9dp"
         android:layout_marginEnd="9dp"
@@ -38,12 +39,14 @@
         android:paddingHorizontal="15dp"
         android:paddingTop="5dp"
         app:itemIconSize="29dp"
+        app:itemIconTint="@color/nav_item_color"
         app:itemRippleColor="@android:color/transparent"
+        app:itemTextColor="@color/nav_item_color"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_fragmentContainer"
+        app:layout_constraintTop_toBottomOf="@+id/main_frm"
         app:menu="@menu/bottom_nav_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
