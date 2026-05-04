@@ -8,6 +8,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.week2.databinding.ActivityMainBinding
 
+@AndroidEntryPoint  // ← 추가
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -29,27 +30,18 @@ class MainActivity : AppCompatActivity() {
         val receivedTitle = intent.getStringExtra("title_key") ?: "Discover"
 
         if (savedInstanceState == null) {
-            // 2. HomeFragment 인스턴스 생성 및 데이터 담기
             val homeFragment = HomeFragment()
             val bundle = Bundle()
             bundle.putString("home_title", receivedTitle)
             homeFragment.arguments = bundle
-
 
             supportFragmentManager.beginTransaction()
                 .replace(R.id.main_frm, homeFragment)
                 .commit()
         }
 
-
-
-
-
-            //BottomNavigationView를 눌렀을 때 Fragment 변경하기
         binding.mainBnv.setOnItemSelectedListener { item ->
             when (item.itemId) {
-
-                //매인 화면
                 R.id.homeFragment -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.main_frm, HomeFragment())
@@ -88,7 +80,6 @@ class MainActivity : AppCompatActivity() {
                         .commit()
                     true
                 }
-
                 else -> false
             }
         }
