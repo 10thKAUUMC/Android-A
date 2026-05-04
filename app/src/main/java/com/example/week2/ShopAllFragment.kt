@@ -3,65 +3,33 @@ package com.example.week2
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.GridLayoutManager
-import com.example.week2.databinding.FragmentShopAllBinding // 🌟 반드시 이 바인딩인지 확인!
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
+import androidx.fragment.app.viewModels
+import com.example.week2.databinding.FragmentShopAllBinding
+import com.example.week2.ui.home.HomeViewModel
+import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ShopAllFragment : Fragment(R.layout.fragment_shop_all) {
 
     private var _binding: FragmentShopAllBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var productManager: ProductManager
-    private lateinit var shopAdapter: HomeProductAdapter
-    private var currentList: List<ProductData> = emptyList()
+    private val viewModel: HomeViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentShopAllBinding.bind(view)
 
-        productManager = ProductManager(requireContext())
+        binding.viewPager.adapter = ShopPagerAdapter(this)
 
-        // 1. 어댑터 초기화 (하트 클릭 기능 포함)
-        shopAdapter = HomeProductAdapter(emptyList()) { clickedProduct ->
-            val updatedList = currentList.map {
-                if (it.id == clickedProduct.id) {
-                    it.copy(isLiked = !it.isLiked)
-                } else {
-                    it
-                }
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            tab.text = when (position) {
+                0 -> "전체"
+                1 -> "Tops & T-Shirts"
+                else -> "Sale"
             }
-            viewLifecycleOwner.lifecycleScope.launch {
-                productManager.saveProducts(updatedList)
-            }
-        }
-
-        // 2. 리사이클러뷰 설정 (2줄 그리드)
-        binding.rvShop.apply {
-            adapter = shopAdapter
-            layoutManager = GridLayoutManager(requireContext(), 2)
-        }
-
-        // 3. DataStore 데이터 관찰 (이 부분이 실행되어야 물건이 나타납니다)
-        viewLifecycleOwner.lifecycleScope.launch {
-            productManager.getProducts().collectLatest { products ->
-                currentList = products
-
-                if (products.isEmpty() || products.any { it.imageResName.isNullOrEmpty() }) {
-                    // 최초 실행 또는 구버전 데이터(정수 리소스 ID 저장) 감지 시 재초기화
-                    val initialData = listOf(
-                        ProductData(1, "Air Jordan XXXVI", "US$185", "air_jordan", false),
-                        ProductData(2, "Nike Air Force 1'07", "US$115", "nike_air_force", false)
-                    )
-                    productManager.saveProducts(initialData)
-                } else {
-                    // 데이터가 있으면 어댑터에 갱신!
-                    shopAdapter.updateData(products)
-                }
-            }
-        }
+        }.attach()
     }
 
     override fun onDestroyView() {

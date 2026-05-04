@@ -5,7 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.chapter1.databinding.FragmentBagBinding
+import com.example.week2.R
+import com.example.week2.databinding.FragmentBagBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,7 +42,7 @@ class BagFragment : Fragment() {
 
         binding.btnorder.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .replace(R.id.main_fragmentContainer, ShoppingFragment()) // (어디에, 무엇을)
+                .replace(R.id.main_frm, ShoppingFragment()) // (어디에, 무엇을)
                 .commit()
 
         }

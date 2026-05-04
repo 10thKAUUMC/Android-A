@@ -1,4 +1,5 @@
 package com.example.chapter1
+import com.example.week2.R
 
 import android.view.LayoutInflater
 import android.view.View
@@ -54,10 +55,10 @@ class HomeAdapter(
 
         // 하트 클릭 이벤트 (쇼핑 페이지에서만 작동하도록 조건문 안으로 이동 가능)
         holder.wish.setOnClickListener {
-            val newWishIcon = if (item.wish == R.drawable.ic_heatr_off) {
+            val newWishIcon = if (item.wish == R.drawable.ic_heart_off) {
                 R.drawable.ic_heart_on
             } else {
-                R.drawable.ic_heatr_off
+                R.drawable.ic_heart_off
             }
             itemList[position] = item.copy(wish = newWishIcon)
             notifyItemChanged(position)

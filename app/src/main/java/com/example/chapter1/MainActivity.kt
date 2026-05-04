@@ -1,11 +1,12 @@
 package com.example.chapter1
+import com.example.week2.R
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.chapter1.databinding.ActivityMainBinding
+import com.example.week2.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,7 +15,7 @@ class MainActivity : AppCompatActivity() {
 //    override fun onStart() {
 //        super.onStart()
 //        supportFragmentManager.beginTransaction()
-//            .replace(R.id.main_fragmentContainer, HomeFragment())
+//            .replace(R.id.main_frm, HomeFragment())
 //            .commit()
 //    }
 
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
 
             supportFragmentManager.beginTransaction()
-                .replace(R.id.main_fragmentContainer, homeFragment)
+                .replace(R.id.main_frm, homeFragment)
                 .commit()
         }
 
@@ -51,39 +52,39 @@ class MainActivity : AppCompatActivity() {
                 //매인 화면
                 R.id.homeFragment -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_fragmentContainer, HomeFragment())
+                        .replace(R.id.main_frm, HomeFragment())
                         .commit()
                     true
                 }
 
                 //일기 작성 화면
-                R.id.diaryFragment -> {
+                R.id.shopFragment -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_fragmentContainer, ShoppingFragment())
+                        .replace(R.id.main_frm, ShoppingFragment())
                         .commit()
                     true
                 }
 
                 //일기 히스토리 화면
-                R.id.calendarFragment -> {
+                R.id.wishlistFragment -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_fragmentContainer, WishlistFragment())
+                        .replace(R.id.main_frm, WishlistFragment())
                         .commit()
                     true
                 }
 
                 //친구 화면
-                R.id.friendFragment -> {
+                R.id.cartFragment -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_fragmentContainer, BagFragment())
+                        .replace(R.id.main_frm, BagFragment())
                         .commit()
                     true
                 }
 
                 //마이페이지 화면
-                R.id.mypageFragment -> {
+                R.id.profileFragment -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_fragmentContainer, ProfileFragment())
+                        .replace(R.id.main_frm, ProfileFragment())
                         .commit()
                     true
                 }
