@@ -1,27 +1,28 @@
 package com.example.chapter1
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.chapter1.databinding.FragmentProfileBinding
-import okhttp3.OkHttpClient
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import com.example.chapter1.ui.profile.ProfileViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
-    private val API_KEY = "reqres_468c6f71952646528b8234815e9906b4"
+    private val viewModel: ProfileViewModel by viewModels()
     private lateinit var followingAdapter: FollowingAdapter
 
     override fun onCreateView(
@@ -35,62 +36,29 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 1. 리사이클러뷰 초기화 (가로 방향)
+        // 리사이클러뷰 초기화
         followingAdapter = FollowingAdapter(emptyList())
         binding.rvFollowing.apply {
             adapter = followingAdapter
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         }
 
-        // 2. 데이터 가져오기
-        fetchData()
+        // uiState 관찰
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collect { state ->
+                    if (state.nickname.isNotEmpty()) {
+                        binding.tvNickname.text = state.nickname
+                    }
+                    followingAdapter.updateList(state.followingList)
+                    state.error?.let {
+                        Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
 
-        // 3. 버튼 클릭 리스너
         setupClickListeners()
-    }
-
-    private fun fetchData() {
-        // 공통 인증 클라이언트
-        val client = OkHttpClient.Builder().addInterceptor { chain ->
-            val request = chain.request().newBuilder()
-                .addHeader("x-api-key", API_KEY)
-                .build()
-            chain.proceed(request)
-        }.build()
-
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://reqres.in/")
-            .client(client)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val service = retrofit.create(ReqResService::class.java)
-
-        // API 호출 A: 상단 닉네임
-        service.getUser().enqueue(object : Callback<UserResponse> {
-            override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
-                if (response.isSuccessful) {
-                    val user = response.body()?.data
-                    binding.tvNickname.text = "${user?.firstName} ${user?.lastName}"
-                }
-            }
-            override fun onFailure(call: Call<UserResponse>, t: Throwable) {
-                Log.e("API_ERROR", "Nickname load failed")
-            }
-        })
-
-        // API 호출 B: 하단 팔로잉 이미지 리스트
-        service.getUserList().enqueue(object : Callback<UserListResponse> {
-            override fun onResponse(call: Call<UserListResponse>, response: Response<UserListResponse>) {
-                if (response.isSuccessful) {
-                    val users = response.body()?.data ?: emptyList()
-                    followingAdapter.updateList(users)
-                }
-            }
-            override fun onFailure(call: Call<UserListResponse>, t: Throwable) {
-                Log.e("API_ERROR", "User list load failed")
-            }
-        })
     }
 
     private fun setupClickListeners() {
