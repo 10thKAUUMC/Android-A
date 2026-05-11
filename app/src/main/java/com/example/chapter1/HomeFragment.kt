@@ -1,4 +1,5 @@
 package com.example.chapter1
+import com.example.week2.R
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import android.widget.Toast
-import com.example.chapter1.databinding.FragmentHomeBinding
+import com.example.week2.databinding.FragmentHomeBinding
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.lifecycle.lifecycleScope
@@ -74,7 +75,7 @@ class HomeFragment : Fragment() {
             }
         }
 
-        binding.recHome.apply {
+        binding.rvHomeProduct.apply {
             layoutManager = GridLayoutManager(context, 2)
             adapter = homeAdapter
         }

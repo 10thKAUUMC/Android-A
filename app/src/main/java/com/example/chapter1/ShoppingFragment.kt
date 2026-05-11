@@ -1,4 +1,5 @@
 package com.example.chapter1
+import com.example.week2.R
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.chapter1.databinding.FragmentShoppingBinding
+import com.example.week2.databinding.FragmentShoppingBinding
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.first // Flow의 현재 값을 한 번만 가져오기 위해 추가
@@ -47,7 +48,7 @@ class ShoppingFragment : Fragment() {
                     if (item.wish == R.drawable.ic_heart_on && !isInWishlist) {
                         // 하트가 켜졌는데 위시리스트에 없다면 추가
                         currentWishlist.add(item)
-                    } else if (item.wish == R.drawable.ic_heatr_off && isInWishlist) {
+                    } else if (item.wish == R.drawable.ic_heart_off && isInWishlist) {
                         // 하트가 꺼졌는데 위시리스트에 있다면 삭제
                         currentWishlist.removeAll { it.title == item.title }
                     }
@@ -68,10 +69,10 @@ class ShoppingFragment : Fragment() {
             settingsManager.shoppingItemsFlow.collect { dataList ->
                 if (dataList.isEmpty()) {
                     val initialData = listOf(
-                        HomeItem("","Nike Everyday Plus", "Training Socks","US$10", R.mipmap.ic_socks2, R.drawable.ic_heatr_off),
-                        HomeItem("","Nike Elite Crew", "Basketball Socks","US$16", R.mipmap.ic_socks1, R.drawable.ic_heatr_off),
-                        HomeItem("BestSeller","Nike Air Force 1", "Women's Shoes","US$115", R.mipmap.ic_shoe3, R.drawable.ic_heatr_off),
-                        HomeItem("BestSeller","Jordan Essentials", "Men's Shoes","US$115", R.mipmap.ic_shoe4, R.drawable.ic_heatr_off)
+                        HomeItem("","Nike Everyday Plus", "Training Socks","US$10", R.mipmap.ic_socks2, R.drawable.ic_heart_off),
+                        HomeItem("","Nike Elite Crew", "Basketball Socks","US$16", R.mipmap.ic_socks1, R.drawable.ic_heart_off),
+                        HomeItem("BestSeller","Nike Air Force 1", "Women's Shoes","US$115", R.mipmap.ic_shoe3, R.drawable.ic_heart_off),
+                        HomeItem("BestSeller","Jordan Essentials", "Men's Shoes","US$115", R.mipmap.ic_shoe4, R.drawable.ic_heart_off)
                     )
                     settingsManager.saveShoppingItems(initialData)
                 } else {

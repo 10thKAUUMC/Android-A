@@ -1,4 +1,5 @@
 package com.example.chapter1
+import com.example.week2.R
 
 import android.view.LayoutInflater
 import android.view.View
@@ -49,10 +50,10 @@ class HomeAdapter(
 
         // 하트 클릭 이벤트
         holder.wish.setOnClickListener {
-            val newWishIcon = if (item.wish == R.drawable.ic_heatr_off) {
+            val newWishIcon = if (item.wish == R.drawable.ic_heart_off) {
                 R.drawable.ic_heart_on
             } else {
-                R.drawable.ic_heatr_off
+                R.drawable.ic_heart_off
             }
 
             // 데이터 업데이트

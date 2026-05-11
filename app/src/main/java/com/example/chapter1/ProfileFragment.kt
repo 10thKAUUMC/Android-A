@@ -1,4 +1,5 @@
 package com.example.chapter1
+import com.example.week2.R
 
 import android.os.Bundle
 import android.view.LayoutInflater

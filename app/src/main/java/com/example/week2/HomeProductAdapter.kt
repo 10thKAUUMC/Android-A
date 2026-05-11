@@ -33,9 +33,9 @@ class HomeProductAdapter(
             if (showHeart) {
                 binding.ivHeart.visibility = View.VISIBLE
                 if (product.isLiked) {
-                    binding.ivHeart.setImageResource(R.drawable.heart)
+                    binding.ivHeart.setImageResource(R.drawable.ic_heart_on)
                 } else {
-                    binding.ivHeart.setImageResource(R.drawable.pureheart)
+                    binding.ivHeart.setImageResource(R.drawable.ic_heart_off)
                 }
             } else {
                 binding.ivHeart.visibility = View.GONE
@@ -52,15 +52,15 @@ class HomeProductAdapter(
             val imageParams = binding.ivProduct.layoutParams
 
             if (isLargeSize) {
-                // 홈 화면 (스위치 ON): 400dp로 강제 확대
+                // 홈 화면: 360dp
                 val size360 = (360 * density).toInt()
                 rootParams.width = size360
                 imageParams.height = size360
             } else {
-                // 구매하기/위시리스트 (스위치 OFF): 원래 도면대로 160dp 유지
-                val size160 = (160 * density).toInt()
-                rootParams.width = size160
-                imageParams.height = size160
+                // 구매하기/위시리스트: width 208dp, image 184×184dp
+                rootParams.width = (208 * density).toInt()
+                imageParams.width = (184 * density).toInt()
+                imageParams.height = (184 * density).toInt()
             }
 
             binding.root.layoutParams = rootParams
