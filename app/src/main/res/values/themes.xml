@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- 기본 애플리케이션 테마 설정 -->
+    <style name="Theme.Compose" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+    </style>
 
-    <style name="Theme.Compose" parent="android:Theme.Material.Light.NoActionBar" />
+    <!-- 하위 호환용 매핑 테마 -->
+    <style name="Theme.App" parent="Theme.Compose" />
+
+    <!-- 프로필 이미지 둥글게 깎는 모양 스타일 -->
+    <style name="CircleShapeAppearance" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <!-- 쇼핑 탭 화면의 텍스트 스타일 추가 (현재 에러 해결용 핵심) -->
+    <style name="TabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>
