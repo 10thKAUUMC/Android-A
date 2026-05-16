@@ -1,19 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">나이키 클론</string>
+    <!-- 기본 프로젝트 설정 -->
+    <string name="app_name">My Application</string>
 
+    <!-- 1차 추가 문자열 리소스 -->
+    <string name="next">다음</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
     <string name="profile_nickname">닉네임</string>
     <string name="profile_edit_text">프로필 수정</string>
+    <string name="profile_membership_title">멤버십 멤버</string>
+    <string name="profile_membership_status">활성화됨</string>
+    <string name="profile_following_count">0</string>
+    <string name="profile_edit_following">팔로잉 변경</string>
 
-    <string name="profile_following_count">팔로잉</string>
-    <string name="profile_join_date_text">회원 가입일: 2025년 9월</string>
-    <string name="profile_edit_following">편집</string>
-
-    <string name="profile_membership_title">나이키 멤버 혜택</string>
-    <string name="profile_membership_status">0개 사용 가능</string>
-
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-    <string name="lorem_ipsum">Lorem ipsum dolor sit amet.</string>
+    <!-- 2차 추가 문자열 리소스 (현재 에러 해결용 핵심) -->
+    <string name="profile_join_date_text">가입일: 2026.05</string>
+    <string name="previous">이전</string>
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
 </resources>

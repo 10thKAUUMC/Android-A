@@ -1,12 +1,11 @@
 plugins {
     alias(libs.plugins.android.application)
-    id("org.jetbrains.kotlin.android")
-    id("com.google.devtools.ksp")
-    id("com.google.dagger.hilt.android")
+    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
-    namespace = "com.example.week2"
+    namespace = "com.example.compose"
     compileSdk {
         version = release(36) {
             minorApiLevel = 1
@@ -14,9 +13,9 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.week2"
+        applicationId = "com.example.compose"
         minSdk = 24
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -36,42 +35,48 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    kotlinOptions {
-        jvmTarget = "11"
-    }
+
     buildFeatures {
-        viewBinding = true
+        compose = true  // 중복 제거 후 한 곳에만
     }
 }
 
 dependencies {
+    // Core
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.constraintlayout)
-    implementation("androidx.navigation:navigation-fragment-ktx:2.9.0")
-    implementation("androidx.navigation:navigation-ui-ktx:2.9.0")
-    implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.7")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
-    implementation("androidx.fragment:fragment-ktx:1.8.5")
-    implementation("androidx.recyclerview:recyclerview:1.4.0")
-    implementation("androidx.cardview:cardview:1.0.0")
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+
+    // Compose BOM (한 곳에서만 선언 - 버전 통일)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.ui.graphics)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.compose.material3)
+
+    // Activity Compose
+    implementation(libs.androidx.activity.compose)
+
+    // Compose Foundation (HorizontalPager 포함)
+    implementation("androidx.compose.foundation:foundation")
+
+    // Navigation Compose (libs 버전 사용, 중복 제거)
+    implementation(libs.androidx.navigation.compose)
+
+    // Serialization
+    implementation(libs.kotlinx.serialization.json)
+
+    // Test
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-    implementation("androidx.datastore:datastore-preferences:1.1.1")
-    implementation("com.google.code.gson:gson:2.10.1")
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.okhttp3:okhttp:4.12.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
-    implementation("com.github.bumptech.glide:glide:4.16.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
-    implementation("androidx.viewpager2:viewpager2:1.1.0")
-    implementation("com.google.dagger:hilt-android:2.56.2")
-    ksp("com.google.dagger:hilt-android-compiler:2.56.2")
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
+    implementation("com.google.android.material:material:1.12.0")
+    implementation("androidx.compose.material3:material3:1.2.1")
+    val navVersion = "2.8.8"
+    implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
+    implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
+    implementation("androidx.fragment:fragment-ktx:1.8.5")
 }
