@@ -79,4 +79,6 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
     implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
     implementation("androidx.fragment:fragment-ktx:1.8.5")
+    implementation("io.coil-kt:coil-compose:2.6.0")
+    implementation("androidx.compose.foundation:foundation:1.6.0")
 }
