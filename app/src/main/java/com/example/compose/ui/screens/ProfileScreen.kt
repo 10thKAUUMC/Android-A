@@ -159,13 +159,13 @@ fun ProfileScreen() {
                     horizontalArrangement = Arrangement.SpaceEvenly,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    MenuIconItem(iconResId = R.drawable.ic_menu_bag, label = "주문")
+                    MenuIconItem(iconResId = R.drawable.ic_order, label = "주문")
                     MenuDivider()
-                    MenuIconItem(iconResId = R.drawable.ic_menu_user, label = "패스")
+                    MenuIconItem(iconResId = R.drawable.ic_passcard, label = "패스")
                     MenuDivider()
-                    MenuIconItem(iconResId = R.drawable.ic_menu_home2, label = "이벤트")
+                    MenuIconItem(iconResId = R.drawable.ic_calander, label = "이벤트")
                     MenuDivider()
-                    MenuIconItem(iconResId = R.drawable.ic_menu_search, label = "설정")
+                    MenuIconItem(iconResId = R.drawable.ic_gear, label = "설정")
                 }
 
                 Spacer(modifier = Modifier.height(24.dp))
@@ -253,8 +253,6 @@ fun ProfileScreen() {
                             CircularProgressIndicator(color = Color.LightGray)
                         }
                     } else {
-                        // ✅ HorizontalPager로 변경
-                        // 한 페이지에 유저 3명씩 묶어서 표시
                         val pageSize = 3
                         val pages = followingUsers.chunked(pageSize)
                         val pagerState = rememberPagerState(pageCount = { pages.size })
@@ -277,7 +275,6 @@ fun ProfileScreen() {
                             }
                         }
 
-                        // ✅ 페이지 인디케이터 dots
                         Spacer(modifier = Modifier.height(12.dp))
                         Row(
                             modifier = Modifier.fillMaxWidth(),
@@ -321,6 +318,7 @@ fun ProfileScreen() {
     }
 }
 
+// ✅ 변경된 부분: CircleShape → RoundedCornerShape(8.dp)
 @Composable
 fun FollowingUserItem(user: FollowingUser) {
     Column(
@@ -332,8 +330,9 @@ fun FollowingUserItem(user: FollowingUser) {
             contentDescription = "${user.firstName} 프로필",
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                .size(64.dp)
-                .clip(CircleShape)
+                .width(107.dp)
+                .height(106.dp)
+                .clip(RoundedCornerShape(0.dp))  // ✅ 변경: CircleShape → RoundedCornerShape(8.dp)
                 .background(Color(0xFFE0E0E0))
         )
         Spacer(modifier = Modifier.height(8.dp))
