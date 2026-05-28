@@ -117,14 +117,14 @@ fun MainBannerSection() {
 fun ShoeCard(shoe: ShoeItem) {
     // 개별 신발 아이템을 보여주는 카드 UI
     Column(
-        modifier = Modifier.width(200.dp) // 각 신발 아이템의 가로 크기 제한
+        modifier = Modifier.width(314.dp) // 각 신발 아이템의 가로 크기 제한
     ) {
         Image(
             painter = painterResource(id = shoe.imageResId),
             contentDescription = shoe.name,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp),
+                .height(314.dp),
             contentScale = ContentScale.Fit
         )
         Spacer(modifier = Modifier.height(8.dp))
