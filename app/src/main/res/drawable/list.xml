@@ -1,0 +1,56 @@
+<!--
+  ~ Copyright (C) 2026 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="37dp"
+    android:height="37dp"
+    android:viewportWidth="37"
+    android:viewportHeight="37">
+  <group>
+    <clip-path
+        android:pathData="M6.5,0h24v24h-24z"/>
+    <path
+        android:pathData="M8,9H11"
+        android:strokeLineJoin="round"
+        android:strokeWidth="2"
+        android:fillColor="#00000000"
+        android:strokeColor="#767676"
+        android:strokeLineCap="round"/>
+    <path
+        android:pathData="M8,13.5H11"
+        android:strokeLineJoin="round"
+        android:strokeWidth="2"
+        android:fillColor="#00000000"
+        android:strokeColor="#767676"
+        android:strokeLineCap="round"/>
+    <path
+        android:pathData="M20.375,17.25C23.896,17.25 26.75,14.396 26.75,10.875C26.75,7.354 23.896,4.5 20.375,4.5C16.854,4.5 14,7.354 14,10.875C14,14.396 16.854,17.25 20.375,17.25Z"
+        android:strokeLineJoin="round"
+        android:strokeWidth="2"
+        android:fillColor="#00000000"
+        android:strokeColor="#767676"
+        android:strokeLineCap="round"/>
+    <path
+        android:pathData="M25.25,15.75L29,19.5"
+        android:strokeLineJoin="round"
+        android:strokeWidth="2"
+        android:fillColor="#00000000"
+        android:strokeColor="#767676"
+        android:strokeLineCap="round"/>
+  </group>
+  <path
+      android:pathData="M1.922,28.32H7.582V28.99H1.922V28.32ZM0.902,32.2H9.072V32.89H0.902V32.2ZM4.552,32.66H5.382V36.79H4.552V32.66ZM7.182,28.32H8.002V29.11C8.002,29.423 7.995,29.753 7.982,30.1C7.975,30.447 7.948,30.83 7.902,31.25C7.855,31.663 7.775,32.123 7.662,32.63L6.832,32.52C7.012,31.793 7.115,31.157 7.142,30.61C7.168,30.063 7.182,29.563 7.182,29.11V28.32ZM16.791,27.73H17.591V36.78H16.791V27.73ZM15.351,31.31H17.091V32H15.351V31.31ZM14.781,27.92H15.571V36.32H14.781V27.92ZM10.221,28.78H13.671V34.35H10.221V28.78ZM12.891,29.44H11.001V33.69H12.891V29.44ZM25.03,27.73H25.85V36.78H25.03V27.73ZM25.66,31.45H27.33V32.15H25.66V31.45ZM18.85,29.18H24.18V29.86H18.85V29.18ZM21.56,30.6C21.987,30.6 22.363,30.69 22.69,30.87C23.023,31.05 23.283,31.297 23.47,31.61C23.663,31.917 23.76,32.273 23.76,32.68C23.76,33.087 23.663,33.447 23.47,33.76C23.283,34.073 23.023,34.32 22.69,34.5C22.363,34.673 21.987,34.76 21.56,34.76C21.133,34.76 20.753,34.673 20.42,34.5C20.093,34.32 19.833,34.073 19.64,33.76C19.447,33.447 19.35,33.087 19.35,32.68C19.35,32.273 19.447,31.917 19.64,31.61C19.833,31.297 20.093,31.05 20.42,30.87C20.753,30.69 21.133,30.6 21.56,30.6ZM21.56,31.29C21.287,31.29 21.043,31.35 20.83,31.47C20.617,31.59 20.447,31.753 20.32,31.96C20.2,32.167 20.14,32.407 20.14,32.68C20.14,32.953 20.2,33.197 20.32,33.41C20.447,33.617 20.617,33.78 20.83,33.9C21.043,34.013 21.287,34.07 21.56,34.07C21.827,34.07 22.067,34.013 22.28,33.9C22.493,33.78 22.66,33.617 22.78,33.41C22.907,33.197 22.97,32.953 22.97,32.68C22.97,32.407 22.907,32.167 22.78,31.96C22.66,31.753 22.493,31.59 22.28,31.47C22.067,31.35 21.827,31.29 21.56,31.29ZM21.13,27.84H21.96V29.48H21.13V27.84ZM34.489,27.73H35.319V36.78H34.489V27.73ZM31.839,28.71H32.659C32.659,29.363 32.579,29.993 32.419,30.6C32.266,31.207 32.023,31.783 31.689,32.33C31.356,32.87 30.923,33.373 30.389,33.84C29.856,34.307 29.209,34.723 28.449,35.09L28.009,34.42C28.883,34 29.603,33.51 30.169,32.95C30.736,32.39 31.156,31.767 31.429,31.08C31.703,30.387 31.839,29.64 31.839,28.84V28.71ZM28.429,28.71H32.189V29.38H28.429V28.71Z"
+      android:fillColor="#767676"/>
+</vector>

@@ -22,5 +22,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "compose"
+rootProject.name = "UMC3"
 include(":app")
+ 

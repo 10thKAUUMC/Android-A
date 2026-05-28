@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.compose"
+    namespace = "com.example.umc3"
     compileSdk {
         version = release(36) {
             minorApiLevel = 1
@@ -13,11 +13,12 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.compose"
+        applicationId = "com.example.umc3"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -30,53 +31,32 @@ android {
             )
         }
     }
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-
     buildFeatures {
-        compose = true  // 중복 제거 후 한 곳에만
+        compose = true
     }
 }
 
 dependencies {
-    // Core
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-
-    // Compose BOM (한 곳에서만 선언 - 버전 통일)
     implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material.icons.core)
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
-    implementation(libs.androidx.compose.material3)
-
-    // Activity Compose
-    implementation(libs.androidx.activity.compose)
-
-    // Compose Foundation (HorizontalPager 포함)
-    implementation("androidx.compose.foundation:foundation")
-
-    // Navigation Compose (libs 버전 사용, 중복 제거)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.navigation.compose)
-
-    // Serialization
     implementation(libs.kotlinx.serialization.json)
-
-    // Test
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
-    debugImplementation(libs.androidx.compose.ui.tooling)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.androidx.junit)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
-    implementation("com.google.android.material:material:1.12.0")
-    implementation("androidx.compose.material3:material3:1.2.1")
-    val navVersion = "2.8.8"
-    implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
-    implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
-    implementation("androidx.fragment:fragment-ktx:1.8.5")
+    debugImplementation(libs.androidx.compose.ui.tooling)
 }
