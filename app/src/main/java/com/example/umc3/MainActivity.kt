@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import com.example.umc3.data.WishlistRepository
 import com.example.umc3.ui.NikeApp
 import com.example.umc3.ui.theme.UMC3Theme
 
@@ -20,6 +21,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // NikeBottomBar에서 navigationBarsPadding()으로 inset을 직접 처리하므로 충돌 없음.
+        WishlistRepository.init(this)
         enableEdgeToEdge()
         setContent {
             UMC3Theme {

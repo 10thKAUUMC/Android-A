@@ -15,6 +15,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,6 +31,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.umc3.data.WishlistRepository
+import com.example.umc3.data.buyProducts
+import com.example.umc3.ui.components.ProductCard
+import com.example.umc3.ui.components.ProductListContentPadding
 
 /**
  * 구매하기 탭 화면 — 카테고리별 상품 목록 진입점.
@@ -35,6 +42,11 @@ import androidx.compose.ui.unit.sp
  * ## 상태 관리
  * - 선택된 탭 인덱스는 현재 화면 내부에서만 의미 있는 UI 상태라 remember로 로컬 보관.
  * - 추후 데이터 페칭이 붙으면 selectedIndex를 ViewModel(StateFlow)로 hoisting하면 됨.
+ *
+ * ## 본문 — 2열 격자
+ * 3주차 ShoppingFragment의 `GridLayoutManager(context, 2)` + `HomeAdapter`를
+ * `LazyVerticalGrid(columns = GridCells.Fixed(2))`로 교체. 카테고리 필터링은 시니어 미션
+ * 범위라 이번 주차에서는 전체 상품을 그대로 노출한다.
  */
 @Composable
 fun BuyScreen(
@@ -72,8 +84,27 @@ fun BuyScreen(
             color = Color(0xFFEEEEEE),
         )
 
-        // 콘텐츠 영역은 이번 주차에 비워둠. 추후 LazyVerticalGrid 등으로 교체.
-        Box(modifier = Modifier.fillMaxSize())
+        // 2열 격자 — RecyclerView + GridLayoutManager(2) 자리에 LazyVerticalGrid를 끼움.
+        // 자체 스크롤을 가지므로 부모 Column에 verticalScroll을 두지 않아야 한다(중첩 스크롤 충돌).
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(2),
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = ProductListContentPadding,
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalArrangement = Arrangement.spacedBy(20.dp),
+        ) {
+            items(
+                items = buyProducts,
+                key = { product -> product.id },
+            ) { product ->
+                ProductCard(
+                    product = product,
+                    isWished = WishlistRepository.isWished(product),
+                    onHeartClick = { WishlistRepository.toggle(product) },
+                    showHeart = true,
+                )
+            }
+        }
     }
 }
 
