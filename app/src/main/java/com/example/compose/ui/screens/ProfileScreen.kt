@@ -44,51 +44,54 @@ fun ProfileScreen() {
     var avatarUrl by remember { mutableStateOf<String?>(null) }
     var followingUsers by remember { mutableStateOf<List<FollowingUser>>(emptyList()) }
 
+    // API 키 노출 주의 (실제 운영 시 BuildConfig 등으로 관리 권장)
     val apiKey = "reqres_468c6f71952646528b8234815e9906b4"
 
-    fun fetchUser(userId: Int): FollowingUser? {
-        return try {
-            val url = URL("https://reqres.in/api/users/$userId")
-            val connection = url.openConnection() as java.net.HttpURLConnection
-            connection.requestMethod = "GET"
-            connection.connectTimeout = 5000
-            connection.readTimeout = 5000
-            connection.setRequestProperty("User-Agent", "Mozilla/5.0")
-            connection.setRequestProperty("Accept", "application/json")
-            connection.setRequestProperty("x-api-key", apiKey)
+    suspend fun fetchUserImproved(userId: Int): Result<FollowingUser> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val url = URL("https://reqres.in/api/users/$userId")
+                val connection = (url.openConnection() as java.net.HttpURLConnection).apply {
+                    requestMethod = "GET"
+                    connectTimeout = 10000
+                    readTimeout = 10000
+                    setRequestProperty("User-Agent", "Mozilla/5.0")
+                    setRequestProperty("Accept", "application/json")
+                    setRequestProperty("x-api-key", apiKey)
+                }
 
-            if (connection.responseCode == java.net.HttpURLConnection.HTTP_OK) {
-                val json = JSONObject(connection.inputStream.bufferedReader().use { it.readText() })
-                val data = json.getJSONObject("data")
-                FollowingUser(
-                    id = data.getInt("id"),
-                    firstName = data.getString("first_name"),
-                    lastName = data.getString("last_name"),
-                    avatarUrl = data.getString("avatar")
-                )
-            } else null
-        } catch (e: Exception) {
-            e.printStackTrace()
-            null
+                if (connection.responseCode == java.net.HttpURLConnection.HTTP_OK) {
+                    val json = JSONObject(connection.inputStream.bufferedReader().use { it.readText() })
+                    val data = json.getJSONObject("data")
+                    Result.success(FollowingUser(
+                        id = data.getInt("id"),
+                        firstName = data.getString("first_name"),
+                        lastName = data.getString("last_name"),
+                        avatarUrl = data.getString("avatar")
+                    ))
+                } else {
+                    Result.failure(Exception("HTTP Error: ${connection.responseCode}"))
+                }
+            } catch (e: Exception) {
+                Result.failure(e)
+            }
         }
     }
 
     LaunchedEffect(Unit) {
-        withContext(Dispatchers.IO) {
-            val me = fetchUser(1)
-            withContext(Dispatchers.Main) {
-                nickname = if (me != null) "${me.firstName} ${me.lastName}" else "로드 실패"
-                avatarUrl = me?.avatarUrl
-            }
-
-            val users = (2..7).map { id ->
-                async { fetchUser(id) }
-            }.awaitAll().filterNotNull()
-
-            withContext(Dispatchers.Main) {
-                followingUsers = users
-            }
+        val meResult = fetchUserImproved(1)
+        meResult.onSuccess { me ->
+            nickname = "${me.firstName} ${me.lastName}"
+            avatarUrl = me.avatarUrl
+        }.onFailure {
+            nickname = "로드 실패"
         }
+
+        val users = (2..7).map { id ->
+            async { fetchUserImproved(id) }
+        }.awaitAll().mapNotNull { it.getOrNull() }
+
+        followingUsers = users
     }
 
     Surface(
