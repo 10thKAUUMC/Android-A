@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.sp
 import com.example.umc3.R
 import com.example.umc3.data.homeLatestProducts
 import com.example.umc3.ui.components.HorizontalProductCard
+import com.example.umc3.ui.theme.NikeSubText
 
 /**
  * 홈 탭 화면 — "Discover" 피드 진입점.
@@ -64,7 +65,7 @@ fun HomeScreen(
             Text(
                 // 시안 그대로 하드코딩. 실제는 LocalDate.now() 포매팅으로 대체 예정.
                 text = "9월 4일 목요일",
-                color = Color(0xFF767676),
+                color = NikeSubText,
                 fontSize = 13.sp,
             )
             Spacer(modifier = Modifier.height(20.dp))

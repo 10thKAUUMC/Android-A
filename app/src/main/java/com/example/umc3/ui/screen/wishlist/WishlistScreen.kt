@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.sp
 import com.example.umc3.data.WishlistRepository
 import com.example.umc3.ui.components.ProductCard
 import com.example.umc3.ui.components.ProductListContentPadding
+import com.example.umc3.ui.theme.NikeSubText
 
 /**
  * 위시리스트 탭 화면 — 사용자가 찜한 상품 목록 진입점.
@@ -65,7 +66,7 @@ fun WishlistScreen(
             ) {
                 Text(
                     text = "아직 찜한 상품이 없습니다.\n홈/구매하기에서 하트를 눌러 추가해보세요.",
-                    color = Color(0xFF767676),
+                    color = NikeSubText,
                     fontSize = 14.sp,
                 )
             }

@@ -30,6 +30,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.umc3.data.Product
+import com.example.umc3.ui.theme.NikeBadgeOrange
+import com.example.umc3.ui.theme.NikePlaceholder
+import com.example.umc3.ui.theme.NikeRed
+import com.example.umc3.ui.theme.NikeSubText
 
 /**
  * 상품 카드 — Home/Buy/Wishlist 세 화면이 공유하는 단일 아이템 컴포저블.
@@ -59,7 +63,7 @@ fun ProductCard(
                 .fillMaxWidth()
                 .aspectRatio(1f)
                 .clip(RoundedCornerShape(4.dp))
-                .background(Color(0xFFF5F5F5)),
+                .background(NikePlaceholder),
         ) {
             Image(
                 painter = painterResource(id = product.imageRes),
@@ -72,7 +76,7 @@ fun ProductCard(
                 Icon(
                     imageVector = if (isWished) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
                     contentDescription = if (isWished) "위시리스트에서 제거" else "위시리스트에 추가",
-                    tint = if (isWished) Color(0xFFE81E26) else Color.Black,
+                    tint = if (isWished) NikeRed else Color.Black,
                     modifier = Modifier
                         .align(Alignment.TopEnd)
                         .clickable(onClick = onHeartClick)
@@ -88,7 +92,7 @@ fun ProductCard(
         if (!product.badge.isNullOrEmpty()) {
             Text(
                 text = product.badge,
-                color = Color(0xFFFA5400),
+                color = NikeBadgeOrange,
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(bottom = 2.dp),
@@ -104,7 +108,7 @@ fun ProductCard(
         if (showSubtitle) {
             Text(
                 text = product.subtitle,
-                color = Color(0xFF767676),
+                color = NikeSubText,
                 fontSize = 13.sp,
             )
         }

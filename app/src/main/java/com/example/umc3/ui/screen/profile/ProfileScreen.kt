@@ -45,14 +45,21 @@ import coil3.compose.AsyncImage
 import com.example.umc3.R
 import com.example.umc3.data.UserRepository
 import com.example.umc3.data.network.dto.User
+import com.example.umc3.ui.theme.NikeAvatarGray
+import com.example.umc3.ui.theme.NikeBorder
+import com.example.umc3.ui.theme.NikeDivider
+import com.example.umc3.ui.theme.NikePlaceholder
+import com.example.umc3.ui.theme.NikeRed
+import com.example.umc3.ui.theme.NikeSubText
 import kotlinx.coroutines.async
 
-private val ScreenBackground = Color(0xFFF5F5F5)
+// 공용 팔레트(theme/Color.kt)를 화면 안에서 부르는 이름으로 매핑 — 의미 있는 지역 별칭만 유지.
+private val ScreenBackground = NikePlaceholder
 private val CardBackground = Color.White
-private val PlaceholderGray = Color(0xFFD9D9D9)
-private val DividerGray = Color(0xFFEEEEEE)
-private val SubTextGray = Color(0xFF767676)
-private val BorderGray = Color(0xFFE5E5E5)
+private val PlaceholderGray = NikeAvatarGray
+private val DividerGray = NikeDivider
+private val SubTextGray = NikeSubText
+private val BorderGray = NikeBorder
 
 @Composable
 fun ProfileScreen(
@@ -101,7 +108,7 @@ fun ProfileScreen(
             ) {
                 Text(
                     text = "에러: $errorMessage",
-                    color = Color(0xFFE81E26),
+                    color = NikeRed,
                     fontSize = 14.sp,
                 )
             }
