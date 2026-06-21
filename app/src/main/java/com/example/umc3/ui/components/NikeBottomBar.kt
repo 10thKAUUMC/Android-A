@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.sp
 import com.example.umc3.ui.navigation.AppDestination
 import com.example.umc3.ui.navigation.BottomNavItem
 import com.example.umc3.ui.navigation.bottomNavItems
+import com.example.umc3.ui.theme.NikeSubText
 
 /**
  * Nike 앱 하단 커스텀 BottomBar.
@@ -76,7 +77,7 @@ private fun BottomBarItem(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val contentColor = if (isSelected) Color(0xFF000000) else Color(0xFF767676)
+    val contentColor = if (isSelected) Color.Black else NikeSubText
     val fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
 
     // ripple/indication 제거. interactionSource는 remember로 감싸 누수 방지.

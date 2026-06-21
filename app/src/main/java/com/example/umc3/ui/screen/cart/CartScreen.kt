@@ -26,6 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.umc3.R
+import com.example.umc3.ui.theme.NikeSubText
 
 /**
  * 장바구니 탭 화면 — 빈 상태 안내 + "주문하기" CTA.
@@ -63,14 +64,14 @@ fun CartScreen(
             Spacer(modifier = Modifier.height(16.dp))
             Text(
                 text = "장바구니가 비어 있습니다.",
-                color = Color(0xFF767676),
+                color = NikeSubText,
                 fontSize = 14.sp,
                 textAlign = TextAlign.Center,
             )
             Spacer(modifier = Modifier.height(2.dp))
             Text(
                 text = "제품을 추가하면 여기에 표시됩니다.",
-                color = Color(0xFF767676),
+                color = NikeSubText,
                 fontSize = 14.sp,
                 textAlign = TextAlign.Center,
             )

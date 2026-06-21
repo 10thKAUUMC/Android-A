@@ -35,6 +35,8 @@ import com.example.umc3.data.WishlistRepository
 import com.example.umc3.data.buyProducts
 import com.example.umc3.ui.components.ProductCard
 import com.example.umc3.ui.components.ProductListContentPadding
+import com.example.umc3.ui.theme.NikeDivider
+import com.example.umc3.ui.theme.NikeSubText
 
 /**
  * 구매하기 탭 화면 — 카테고리별 상품 목록 진입점.
@@ -81,7 +83,7 @@ fun BuyScreen(
 
         HorizontalDivider(
             thickness = 1.dp,
-            color = Color(0xFFEEEEEE),
+            color = NikeDivider,
         )
 
         // 2열 격자 — RecyclerView + GridLayoutManager(2) 자리에 LazyVerticalGrid를 끼움.
@@ -118,7 +120,7 @@ private fun BuyTopTab(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val textColor = if (isSelected) Color.Black else Color(0xFF767676)
+    val textColor = if (isSelected) Color.Black else NikeSubText
     val fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
     // 미선택일 때 Transparent로 라인 자리만 차지 → 텍스트가 위아래로 튀지 않게.
     val indicatorColor = if (isSelected) Color.Black else Color.Transparent
