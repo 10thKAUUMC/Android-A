@@ -18,6 +18,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.compose.R
 import com.example.compose.ui.screens.*
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.compose.ui.viewmodel.MainViewModel
 
 sealed class BottomNavItem(
     val route: String,
@@ -40,28 +42,13 @@ val bottomNavItems = listOf(
 )
 
 @Composable
-fun MainScreen() {
+fun MainScreen(viewModel: MainViewModel = viewModel()) {
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
-    // ★ [추가] 두 화면이 공유할 마스터 상품 리스트 상태 관리 (고유 ID 추가)
-    val masterProductList = remember {
-        mutableStateListOf(
-            Product(1, "Nike Everyday Plus Cushioned", "Training Ankle Socks (6 Pairs)", "US$10", R.drawable.nike_everyday_plus),
-            Product(2, "Nike Elite Crew", "Basketball Socks", "US$16", R.drawable.nike_elite_crew),
-            Product(3, "Nike Air Force 1 '07", "Women's Shoes", "US$115", R.drawable.nike_air_force),
-            Product(4, "Jordan ENike Air Force 1 '07ssentials", "Men's Shoes", "US$115", R.drawable.enike)
-        )
-    }
-
-    // ★ [추가] 하트 클릭 시 리스트 내 아이템 상태를 반전시키는 토글 함수
-    val onToggleLike: (Product) -> Unit = { targetedProduct ->
-        val index = masterProductList.indexOfFirst { it.id == targetedProduct.id }
-        if (index != -1) {
-            masterProductList[index] = masterProductList[index].copy(isLiked = !masterProductList[index].isLiked)
-        }
-    }
+    val masterProductList = viewModel.masterProductList
+    val onToggleLike: (Product) -> Unit = { viewModel.toggleLike(it) }
 
     Scaffold(
         containerColor = Color.White,
