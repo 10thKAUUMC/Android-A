@@ -1,5 +1,6 @@
 package com.example.umc3.data.network
 
+import com.example.umc3.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -9,7 +10,8 @@ import java.util.concurrent.TimeUnit
 object ApiClient {
 
     private const val BASE_URL = "https://reqres.in/"
-    private const val API_KEY = "reqres_f427660d0099433593ffcd4713756afe"
+    // 키는 local.properties → BuildConfig 경유로 주입(.gitignore되어 저장소에 노출되지 않음).
+    private val API_KEY = BuildConfig.REQRES_API_KEY
 
     private val logging = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY

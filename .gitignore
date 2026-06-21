@@ -13,3 +13,11 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# 앱 서명 (절대 커밋 금지)
+*.jks
+*.keystore
+keystore.properties
+
+# GUI(Generate Signed Bundle) 산출물 — 빌드 아티팩트라 커밋 제외
+/app/release

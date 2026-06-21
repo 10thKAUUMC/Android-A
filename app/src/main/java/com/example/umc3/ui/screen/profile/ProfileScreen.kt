@@ -45,6 +45,7 @@ import coil3.compose.AsyncImage
 import com.example.umc3.R
 import com.example.umc3.data.UserRepository
 import com.example.umc3.data.network.dto.User
+import kotlinx.coroutines.async
 
 private val ScreenBackground = Color(0xFFF5F5F5)
 private val CardBackground = Color.White
@@ -65,8 +66,12 @@ fun ProfileScreen(
 
     LaunchedEffect(Unit) {
         isLoading = true
-        val userResult = UserRepository.getUser(1)
-        val listResult = UserRepository.getUsers()
+        // 두 호출은 서로 독립적이므로 async로 동시에 띄워 대기 시간을 절반으로 줄인다.
+        // (LaunchedEffect 블록 자체가 CoroutineScope라 async를 바로 호출할 수 있다.)
+        val userDeferred = async { UserRepository.getUser(1) }
+        val listDeferred = async { UserRepository.getUsers() }
+        val userResult = userDeferred.await()
+        val listResult = listDeferred.await()
 
         userResult.onSuccess { me = it }
             .onFailure { errorMessage = it.message ?: "유저 정보를 불러오지 못했습니다." }
